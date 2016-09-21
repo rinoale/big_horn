@@ -49,10 +49,7 @@ c.on('packet', function(nbytes, trunc) {
 
         Object.keys(filter).forEach(function (key) {
           if (result_buf.indexOf(filter[key]) > -1) {
-            // test output
-            // console.log(result_buf);
-            // console.log(result_buf.toString('utf8'));
-            // console.log(result_buf.indexOf(separator));
+
             var id_message = bufferSplit(result_buf, separator);
 
             console.log(id_message);
@@ -81,10 +78,6 @@ function bufferSplit(buffer, separator) {
   var secondSeparator = buffer.indexOf(separator, firstSeparator)+4;
 
   var msgBuf = buffer.slice(secondSeparator, buffer.indexOf(new Buffer('00', 'hex'), secondSeparator));
-
-  // test output
-  // console.log(idBuf);
-  // console.log(msgBuf);
 
   stringArray.push(idBuf.toString('utf8'));
   stringArray.push(msgBuf.toString('utf8'));
