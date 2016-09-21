@@ -1,0 +1,46 @@
+<html>
+  <head>
+    <title>Main Window</title>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="../resources/css/custom.css">
+    <script>window.$ = window.jQuery = require('../resources/foundation/js/vendor/jquery.js');</script>
+    <!-- foundation css ans js -->
+    <script src="../resources/foundation/js/vendor/what-input.js"></script>
+    <script src="../resources/foundation/js/vendor/foundation.js"></script>
+    <script src="../resources/foundation/js/app.js"></script>
+    <link rel="stylesheet" href="../resources/foundation/css/foundation.css">
+    <link rel="stylesheet" href="../resources/foundation/css/app.css">
+    <!-- /foundation css ans js -->
+  </head>
+
+  <body class="dark-theme">
+    <main-dock class="">
+      <div class="nav list-area" id="user-list">
+      </div>
+      <div class="section chat-area">
+        <div class="chat-log" id="chat-log-print">
+        </div>
+        <div class="chat-input">
+          <div class='row'>
+            <div class='small-10 columns'>
+              <input type="text" class="chat-text" id="chat-text"></input>
+            </div>
+            <div class='small-2 columns'>
+              <a class='small expanded button chat-send' id='chat-send-button' href='#'>send<a/>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bottom">
+        <div class='row'>
+          <a class='small button chat-quit' id='chat-quit-button' href='#'>quit<a/>
+          <a class='small hollow button new-window' id='new-window' href='#'>new-window<a/>
+        </div>
+      </div>
+    </main-dock>  
+  </body>
+  <script>
+    require('./renderer.js')
+  </script>
+</html>

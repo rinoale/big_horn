@@ -2,14 +2,15 @@
   "name": "big_horn",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/main.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "electron .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "cap": "^0.1.1"
+    "cap": "^0.1.1",
+    "electron": "^1.4.0"
   }
 }
