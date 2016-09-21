@@ -24,16 +24,10 @@
     height:20%;
 }
 
-.chat-area {
-}
-
 .chat-log {
     height: 90%;
     overflow-y: auto;
     margin:10px;
-}
-
-.chat-input {
 }
 
 .chat-text {
