@@ -3209,8 +3209,8 @@ table.hover tr:nth-of-type(even):hover {
 .tabs {
   margin: 0;
   list-style-type: none;
-  background: #fefefe;
-  border: 1px solid #e6e6e6; }
+  background: #2d2d2d;
+  color:#999999; }
   .tabs::before, .tabs::after {
     content: ' ';
     display: table; }
@@ -3242,14 +3242,13 @@ table.hover tr:nth-of-type(even):hover {
     line-height: 1;
     font-size: 0.75rem; }
     .tabs-title > a:hover {
-      background: #fefefe; }
+      background: #333333; }
     .tabs-title > a:focus, .tabs-title > a[aria-selected='true'] {
-      background: #e6e6e6; }
+      background: #444444; }
 
 .tabs-content {
-  background: #fefefe;
+  background: #2d2d2d;
   transition: all 0.5s ease;
-  border: 1px solid #e6e6e6;
   border-top: 0; }
 
 .tabs-content.vertical {
