@@ -10,8 +10,9 @@ function addChat() {
 }
 
 MessageCapture(function (obj) {
+    console.log(obj.type);
     var chatPane = document.getElementById(obj.type);
-    if (chatPane !== undefined) {
+    if (chatPane !== null) {
         chatPane.appendChild(ChatNode.chat(obj.name, obj.message))
     } else {
         console.log('Chat pane is not defined', obj);
