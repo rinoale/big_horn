@@ -13,7 +13,7 @@ MessageCapture(function (obj) {
     var chatPane = document.getElementById(obj.type);
     if (chatPane !== null) {
         chatPane.appendChild(ChatNode.chat(obj.name, obj.message));
-        guildMsgPane.scrollTop = guildMsgPane.scrollHeight;
+        chatPane.scrollTop = chatPane.scrollHeight;
     } else {
         console.log('Chat pane is not defined', obj);
     }
