@@ -19,28 +19,27 @@
       <div class="nav list-area" id="user-list">
       </div>
       <div class="section chat-area">
-        <div class="chat-log" id="chat-log-print">
-            <ul class="tabs" data-tabs id="chat-tabs">
-                <li class="tabs-title is-active"><a href="#guildMessage" aria-selected="true">길드</a></li>
-                <li class="tabs-title"><a href="#hornMessage">거뿔</a></li>
-            </ul>
-            <div class="tabs-content" data-tabs-content="chat-tabs">
-                <div class="tabs-panel is-active" id="guildMessage">
-                    
-                </div>
-                <div class="tabs-panel" id="hornMessage">
-                    
-                </div>
-            </div>
-        </div>
-        <div class="chat-input">
-          <div class='row'>
+          <ul class="tabs" data-tabs id="chat-tabs">
+              <li class="tabs-title is-active"><a href="#guildMessage" aria-selected="true">길드</a></li>
+              <li class="tabs-title"><a href="#hornMessage">거뿔</a></li>
+          </ul>
+          <div class="tabs-content" data-tabs-content="chat-tabs">
+              <div class="chat-log tabs-panel is-active" id="guildMessage"></div>
+              <div class="chat-log tabs-panel" id="hornMessage"></div>
           </div>
-        </div>
       </div>
       <div class="bottom">
         <div class='row'>
+          <a class='small button' id='testButton' href='#'>test<a/>
         </div>
+          <div class='row'>
+            <div class="top-bar-right">
+              <ul class="menu">
+                <li><input type="search" placeholder="Search"></li>
+                <li><button type="button" class="button">Search</button></li>
+              </ul>
+            </div>
+          </div>
       </div>
     </main-dock>  
   </body>

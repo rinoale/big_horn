@@ -27,7 +27,6 @@
 .chat-log {
     height: 90%;
     overflow-y: auto;
-    margin:10px;
 }
 
 .chat-text {
