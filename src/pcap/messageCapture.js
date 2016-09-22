@@ -1,6 +1,4 @@
 function MessageCapture(callback) {
-    var cap = require('cap');
-    console.log('suc');
     var Cap = require('cap').Cap,
         decoders = require('cap').decoders,
         PROTOCOL = decoders.PROTOCOL;
