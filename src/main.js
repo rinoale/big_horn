@@ -4,6 +4,8 @@ const {app} = electron;
 // Module to create native browser window.
 const {BrowserWindow} = electron;
 
+const logger = require('./initialize/logger.js');
+
 // var path = require('path');
 // var appDir = path.dirname(require.main.filename);
 
@@ -22,7 +24,7 @@ function createWindow() {
   win.loadURL(`file://${__dirname}/index.html`);
 
   // Open the DevTools.
-  // win.webContents.openDevTools();
+  win.webContents.openDevTools();
 
   // Emitted when the window is closed.
   win.on('closed', () => {
