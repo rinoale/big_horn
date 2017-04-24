@@ -1,10 +1,12 @@
+logger = require('./initialize/logger.js');
+
 const guildMsgPane = document.getElementById('guildMessage');
 const MessageCapture = require('./pcap/messageCapture.js');
 const dialog = require('electron').remote.dialog;
 
 var ChatNode = require('./nodes/chatNode.js');
 
-var captureList = ['스카하'];
+var captureList = ['아본', '아수'];
 
 function addChat() {
     guildMsgPane.appendChild(ChatNode.chat('gbsong', 'test'));
@@ -21,8 +23,8 @@ MessageCapture(function (obj) {
             if (obj.message.match(match)) {
                 const options = {
                     type: 'info',
-                    title: 'information',
-                    message: 'message captured',
+                    title: obj.name,
+                    message: obj.message,
                     buttons: ['Close']
                 }
                 dialog.showMessageBox(options, function (index) {

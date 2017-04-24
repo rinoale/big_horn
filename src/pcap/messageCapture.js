@@ -1,12 +1,15 @@
 var messageParser = require('./messageParser.js');
+var NetworkDetector = require('./networkDetector.js');
 
 function MessageCapture(callback) {
     var Cap = require('cap').Cap,
         decoders = require('cap').decoders,
         PROTOCOL = decoders.PROTOCOL;
 
+    NetworkDetector(Cap.deviceList());
+
     var c = new Cap(),
-        device = Cap.findDevice('192.168.0.2'),
+        device = Cap.findDevice('192.168.0.4'),
         filter = 'tcp and src net 211.218',
         bufSize = 10 * 1024 * 1024,
         buffer = new Buffer(65535);
@@ -41,9 +44,11 @@ function MessageCapture(callback) {
 
             var result_buf = buffer.slice(ret.offset, ret.offset + datalen);
 
+            logger.info('result_buf', result_buf);
+
             messageParser.parse(result_buf, callback);
 
-            
+
         } else if (ret.info.protocol === PROTOCOL.IP.UDP) {
             console.log('Decoding UDP ...');
 
@@ -65,7 +70,7 @@ function MessageCapture(callback) {
         var secondSeparator = buffer.indexOf(separator, firstSeparator)+4;
 
         var msgBuf = buffer.slice(secondSeparator, buffer.indexOf(new Buffer('00', 'hex'), secondSeparator));
-        
+
         return {
             name: idBuf.toString('utf8'),
             message: msgBuf.toString('utf8')
