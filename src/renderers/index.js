@@ -63,16 +63,35 @@ MessageCapture(function (obj) {
     }
 });
 
-const testButton = document.getElementById('testButton');
-
-testButton.addEventListener('click', function () {
-
-});
-
 const horn_search = document.getElementById('horn-search');
 const horn_search_keyword = document.getElementById('horn-search-keyword');
 horn_search_keyword.value = captureList;
 
 horn_search.addEventListener('click', function () {
     captureList = horn_search_keyword.value.split(',');
+})
+
+// $("#revealButton").click(function () {
+//     var pop = new Foundation.Reveal($('#device-selector'), {
+//         animationIn: true,
+//         animationOut: true
+//     })
+//     pop.open();
+//     console.log(pop);
+//     $('a.close-reveal-modal').on('click', function() {
+//       pop.close();
+//     });
+// })
+
+const BrowserWindow = require('electron').remote.BrowserWindow
+const newWindowBtn = document.getElementById('revealButton')
+
+const __path = require('path')
+
+newWindowBtn.addEventListener('click', function (event) {
+const modalPath = __path.join('file://', __dirname, 'src/views/deviceSelect.html')
+let win = new BrowserWindow({ frame: false })
+win.on('close', function () { win = null })
+win.loadURL(modalPath)
+win.show()
 })
