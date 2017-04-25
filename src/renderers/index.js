@@ -68,3 +68,11 @@ const testButton = document.getElementById('testButton');
 testButton.addEventListener('click', function () {
 
 });
+
+const horn_search = document.getElementById('horn-search');
+const horn_search_keyword = document.getElementById('horn-search-keyword');
+horn_search_keyword.value = captureList;
+
+horn_search.addEventListener('click', function () {
+    captureList = horn_search_keyword.value.split(',');
+})
