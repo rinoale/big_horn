@@ -12,6 +12,7 @@
   "dependencies": {
     "cap": "^0.1.1",
     "electron": "^1.4.0",
-    "winston": "^2.2.0"
+    "winston": "^2.2.0",
+    "electron-rebuild": "1.5.7"
   }
 }

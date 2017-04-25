@@ -2,16 +2,6 @@
   <head>
     <title>Main Window</title>
     <meta charset="utf-8">
-
-    <link rel="stylesheet" href="../resources/css/custom.css">
-    <script>window.$ = window.jQuery = require('../resources/foundation/js/vendor/jquery.js');</script>
-    <!-- foundation css ans js -->
-    <script src="../resources/foundation/js/vendor/what-input.js"></script>
-    <script src="../resources/foundation/js/vendor/foundation.js"></script>
-    <script src="../resources/foundation/js/app.js"></script>
-    <link rel="stylesheet" href="../resources/foundation/css/foundation.css">
-    <link rel="stylesheet" href="../resources/foundation/css/app.css">
-    <!-- /foundation css ans js -->
   </head>
 
   <body class="dark-theme">
@@ -44,7 +34,7 @@
     </main-dock>  
   </body>
   <script>
+      require('../renderers/index.js');
       var elem = new Foundation.Tabs($('#chat-tabs'));
-      require('./renderer.js')
   </script>
 </html>

@@ -4,14 +4,14 @@ var logger = new (winston.Logger)({
     transports: [
         new (winston.transports.Console)(),
         new (winston.transports.File)({
-            filename: 'log/big_horn.log',
+            filename: global.src.appPath + '/log/big_horn.log',
             level: 'info'
         })
     ]
 })
 
 // var transportFile = {
-//     filename: 'log/big_horn.log',
+//     filename: global.src.appPath + '/log/big_horn.log',
 //     level: 'info'
 // }
 

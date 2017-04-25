@@ -1,10 +1,34 @@
-logger = require('./initialize/logger.js');
+const remote = require('electron').remote;
+const paths  = remote.getGlobal('paths');
 
-const guildMsgPane = document.getElementById('guildMessage');
-const MessageCapture = require('./pcap/messageCapture.js');
+global.src = {};
+for (var path in paths) {
+    global.src[path] = paths[path];
+}
+
+global.logger = require(global.src.libPath + '/logger.js');
 const dialog = require('electron').remote.dialog;
+const guildMsgPane = document.getElementById('guildMessage');
+const MessageCapture = require(global.src.libPath + '/pcap/messageCapture.js');
+var ChatNode = require(global.src.modulesPath + '/nodes/chatNode.js');
 
-var ChatNode = require('./nodes/chatNode.js');
+var include = require(global.src.libPath + '/include');
+
+window.$ = window.jQuery = require(global.src.resourcesPath + '/foundation/js/vendor/jquery.js');
+
+
+// custom css
+include.link(global.src.resourcesPath + '/css/custom.css')
+// custom css
+
+// foundation css ans js
+require(global.src.resourcesPath + '/foundation/js/vendor/what-input.js');
+require(global.src.resourcesPath + '/foundation/js/vendor/foundation.js');
+require(global.src.resourcesPath + '/foundation/js/app.js');
+
+include.link(global.src.resourcesPath + '/foundation/css/foundation.css')
+include.link(global.src.resourcesPath + '/foundation/css/app.css')
+// foundation css ans js
 
 var captureList = ['아본', '아수'];
 

@@ -4,13 +4,19 @@ const {app} = electron;
 // Module to create native browser window.
 const {BrowserWindow} = electron;
 
-const logger = require('./initialize/logger.js');
-
 // var path = require('path');
 // var appDir = path.dirname(require.main.filename);
 
-global.appRoot = __dirname.replace('\\src', '');
-global.resourcePath = appRoot + '\\resource'
+var appRoot       = __dirname.replace('\\src', '');
+
+global.paths = {
+  appPath       : appRoot,
+  libPath       : __dirname + '\\lib',
+  modulesPath   : __dirname + '\\modules',
+  renderersPath : __dirname + '\\renderers',
+  resourcesPath : appRoot + '\\resources',
+  viewsPath     : __dirname + '\\views'
+}
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -21,7 +27,7 @@ function createWindow() {
   win = new BrowserWindow({width: 1200, height: 900});
 
   // and load the index.html of the app.
-  win.loadURL(`file://${__dirname}/index.html`);
+  win.loadURL(`file://${__dirname}/views/index.html`);
 
   // Open the DevTools.
   win.webContents.openDevTools();
