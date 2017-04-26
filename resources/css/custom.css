@@ -32,3 +32,31 @@
 .chat-text {
     width: 80%;
 }
+
+#device-selector {
+    background-color: grey;
+    height:60%;
+    margin-top:5%;
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-bottom: 20%;
+    padding: 2.5%;
+}
+
+#modalHead {
+    height: 10%;
+
+}
+
+#modalHead h2 {
+    align-content: center;
+    text-align: center;
+}
+
+#modalBody {
+    height: 80%;
+}
+
+#modalFoot {
+    height: 10%;
+}

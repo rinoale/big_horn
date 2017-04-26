@@ -12,24 +12,6 @@ const guildMsgPane = document.getElementById('guildMessage');
 const MessageCapture = require(global.src.libPath + '/pcap/messageCapture.js');
 var ChatNode = require(global.src.modulesPath + '/nodes/chatNode.js');
 
-var include = require(global.src.libPath + '/include');
-
-window.$ = window.jQuery = require(global.src.resourcesPath + '/foundation/js/vendor/jquery.js');
-
-
-// custom css
-include.link(global.src.resourcesPath + '/css/custom.css')
-// custom css
-
-// foundation css ans js
-require(global.src.resourcesPath + '/foundation/js/vendor/what-input.js');
-require(global.src.resourcesPath + '/foundation/js/vendor/foundation.js');
-require(global.src.resourcesPath + '/foundation/js/app.js');
-
-include.link(global.src.resourcesPath + '/foundation/css/foundation.css')
-include.link(global.src.resourcesPath + '/foundation/css/app.css')
-// foundation css ans js
-
 var captureList = ['아본', '아수'];
 
 function addChat() {
@@ -38,30 +20,35 @@ function addChat() {
     guildMsgPane.scrollTop = guildMsgPane.scrollHeight;
 }
 
-MessageCapture(function (obj) {
-    var chatPane = document.getElementById(obj.type);
-    if (chatPane !== null) {
-        captureList.forEach(function (capture) {
-            var match = new RegExp(capture);
+var messageCapture = new MessageCapture('10.0.40.40');
+var messageParser = require(global.src.libPath + '/pcap/messageParser.js');
 
-            if (obj.message.match(match)) {
-                const options = {
-                    type: 'info',
-                    title: obj.name,
-                    message: obj.message,
-                    buttons: ['Close']
+messageCapture.on('message', function (resultBuf) {
+    messageParser.parse(resultBuf, function (obj) {
+        var chatPane = document.getElementById(obj.type);
+        if (chatPane !== null) {
+            captureList.forEach(function (capture) {
+                var match = new RegExp(capture);
+
+                if (obj.message.match(match)) {
+                    const options = {
+                        type: 'info',
+                        title: obj.name,
+                        message: obj.message,
+                        buttons: ['Close']
+                    }
+                    dialog.showMessageBox(options, function (index) {
+                        console.log(index);
+                    });
                 }
-                dialog.showMessageBox(options, function (index) {
-                    console.log(index);
-                });
-            }
-        })
-        chatPane.appendChild(ChatNode.chat(obj.name, obj.message));
-        chatPane.scrollTop = chatPane.scrollHeight;
-    } else {
-        console.log('Chat pane is not defined', obj);
-    }
-});
+            })
+            chatPane.appendChild(ChatNode.chat(obj.name, obj.message));
+            chatPane.scrollTop = chatPane.scrollHeight;
+        } else {
+            console.log('Chat pane is not defined', obj);
+        }
+    })
+})
 
 const horn_search = document.getElementById('horn-search');
 const horn_search_keyword = document.getElementById('horn-search-keyword');
@@ -71,17 +58,16 @@ horn_search.addEventListener('click', function () {
     captureList = horn_search_keyword.value.split(',');
 })
 
-// $("#revealButton").click(function () {
-//     var pop = new Foundation.Reveal($('#device-selector'), {
-//         animationIn: true,
-//         animationOut: true
-//     })
-//     pop.open();
-//     console.log(pop);
-//     $('a.close-reveal-modal').on('click', function() {
-//       pop.close();
-//     });
-// })
+$("#revealButton2").click(function () {
+    var pop = new Foundation.Reveal($('#device-selector'), {
+        animationIn: true,
+        animationOut: true
+    })
+    pop.open();
+    $('a.close-reveal-modal').on('click', function() {
+      pop.close();
+    });
+})
 
 const BrowserWindow = require('electron').remote.BrowserWindow
 const newWindowBtn = document.getElementById('revealButton')
@@ -89,9 +75,9 @@ const newWindowBtn = document.getElementById('revealButton')
 const __path = require('path')
 
 newWindowBtn.addEventListener('click', function (event) {
-const modalPath = __path.join('file://', __dirname, 'src/views/deviceSelect.html')
-let win = new BrowserWindow({ frame: false })
-win.on('close', function () { win = null })
-win.loadURL(modalPath)
-win.show()
+    const modalPath = __path.join('file://', __dirname, 'src/views/deviceSelect.html')
+    let win = new BrowserWindow({ frame: false })
+    win.on('close', function () { win = null })
+    win.loadURL(modalPath)
+    win.show()
 })

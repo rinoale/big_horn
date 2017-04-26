@@ -2,6 +2,16 @@
   <head>
     <title>Main Window</title>
     <meta charset="utf-8">
+
+    <link rel="stylesheet" href="../../resources/css/custom.css">
+    <script>window.$ = window.jQuery = require('../../resources/foundation/js/vendor/jquery.js');</script>
+    <!-- foundation css ans js -->
+    <script src="../../resources/foundation/js/vendor/what-input.js"></script>
+    <script src="../../resources/foundation/js/vendor/foundation.js"></script>
+    <script src="../../resources/foundation/js/app.js"></script>
+    <link rel="stylesheet" href="../../resources/foundation/css/foundation.css">
+    <link rel="stylesheet" href="../../resources/foundation/css/app.css">
+    <!-- /foundation css ans js -->
   </head>
 
   <body class="dark-theme">
@@ -21,6 +31,7 @@
       <div class="bottom">
         <div class='row'>
           <a class='small button' id='revealButton' href='#'>test<a/>
+          <a class='small button' id='revealButton2' href='#'>네트워크 선택<a/>
         </div>
           <div class='row'>
             <div class="top-bar-right">
@@ -31,11 +42,15 @@
             </div>
           </div>
       </div>
-      <div id="device-selector" class="reveal-modal tiny" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
-        <h2 id="modalTitle">Awesome. I have it.</h2>
-        <p class="lead">Your couch.  It is mine.</p>
-        <p>I'm a cool paragraph that lives inside of an even cooler modal. Wins!</p>
-        <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+      <div id="device-selector">
+        <div id="modalHead">
+          <h2 id="modalTitle">네트워크 선택</h2>
+        </div>
+        <div id="modalBody">
+        </div>
+        <div id="modalFoot" class="top-bar-right">
+          <a class="small button close-reveal-modal" aria-label="Close">닫기</a>
+        </div>
       </div>
     </main-dock>
     
@@ -43,6 +58,5 @@
   <script>
       require('../renderers/index.js');
       var elem = new Foundation.Tabs($('#chat-tabs'));
-      
   </script>
 </html>
