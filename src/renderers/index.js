@@ -11,6 +11,7 @@ const dialog = require('electron').remote.dialog;
 const guildMsgPane = document.getElementById('guildMessage');
 const MessageCapture = require(global.src.libPath + '/pcap/messageCapture.js');
 var ChatNode = require(global.src.modulesPath + '/nodes/chatNode.js');
+var NetworkNode = require(global.src.modulesPath + '/nodes/networkNode.js')
 
 var captureList = ['아본', '아수'];
 
@@ -21,7 +22,14 @@ function addChat() {
 }
 
 var messageCapture = new MessageCapture('10.0.40.40');
+var networkDetector = require(global.src.libPath + '/pcap/networkDetector.js')
+
+networkDetector(messageCapture.networklist());
+
+messageCapture.start('10.0.40.40');
+
 var messageParser = require(global.src.libPath + '/pcap/messageParser.js');
+
 
 messageCapture.on('message', function (resultBuf) {
     messageParser.parse(resultBuf, function (obj) {
@@ -63,6 +71,13 @@ $("#revealButton2").click(function () {
         animationIn: true,
         animationOut: true
     })
+    var networklist = document.getElementById('networklist');
+    
+    messageCapture.networklist().forEach(function (network) {
+        var networkInfo = new NetworkNode(network);
+        networklist.appendChild(networkInfo.getNetworkInfo());
+    })
+
     pop.open();
     $('a.close-reveal-modal').on('click', function() {
       pop.close();
