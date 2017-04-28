@@ -21,7 +21,7 @@ function addChat() {
     guildMsgPane.scrollTop = guildMsgPane.scrollHeight;
 }
 
-var messageCapture = new MessageCapture('10.0.40.40');
+var messageCapture = new MessageCapture();
 var networkDetector = require(global.src.libPath + '/pcap/networkDetector.js')
 
 networkDetector(messageCapture.networklist());

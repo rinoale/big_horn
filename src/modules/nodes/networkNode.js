@@ -4,8 +4,7 @@ function NetworkNode(network) {
 }
 
 NetworkNode.prototype.getNetworkInfo = function () {
-    this.clickable_a = document.createElement('a');
-    this.clickable_a.href = '#';
+    this.clickable_a = document.createElement('tr');
 
     this.appendRow('addresses');
     this.appendRow('description');
@@ -15,16 +14,9 @@ NetworkNode.prototype.getNetworkInfo = function () {
 }
 
 NetworkNode.prototype.appendRow = function (subject) {
-    var row_div = document.createElement('div');
-    row_div.class = 'row';
-
-    var key_a = document.createElement('a');
-    key_a.text = subject.toUpperCase() + ':' + (this.network[subject] instanceof Array ? addressParse(this.network[subject]) : this.network[subject]);
-    var value_a = document.createElement('a');
-    value_a.className = subject;
-    row_div.appendChild(key_a);
-    row_div.appendChild(value_a);
-    this.clickable_a.appendChild(row_div);
+    var td = document.createElement('td');
+    td.innerHTML = (this.network[subject] instanceof Array ? addressParse(this.network[subject]) : this.network[subject]);
+    this.clickable_a.appendChild(td);
 }
 
 function addressParse(addresses) {
