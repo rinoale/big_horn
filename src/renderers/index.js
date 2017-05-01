@@ -69,13 +69,12 @@ horn_search.addEventListener('click', function () {
 })
 
 // START::NETWORK LIST RENDERER
-var pop;
-$("#revealButton2").click(function () {
-    pop = new Foundation.Reveal($('#device-selector'), {
-        animationIn: true,
-        animationOut: true
-    })
+var pop = new Foundation.Reveal($('#device-selector'), {
+    animationIn: true,
+    animationOut: true
+})
 
+$("#revealButton2").click(function () {
     pop.open();
     $('a.close-reveal-modal').on('click', function() {
       pop.close();
@@ -104,8 +103,6 @@ var networklistAccordion = new Foundation.Accordion($('#networklist'), {
     multiExpand: true,
     allowAllClosed: true
 });
-
-
 // END::NETWORK LIST RENDERER
 
 const BrowserWindow = require('electron').remote.BrowserWindow
