@@ -21,42 +21,44 @@ function addChat() {
     guildMsgPane.scrollTop = guildMsgPane.scrollHeight;
 }
 
+
 var messageCapture = new MessageCapture();
-var networkDetector = require(global.src.libPath + '/pcap/networkDetector.js')
 
-networkDetector(messageCapture.networklist());
 
-messageCapture.start('10.0.40.40');
 
 var messageParser = require(global.src.libPath + '/pcap/messageParser.js');
 
+function startCaptureWithIp(address) {
+    console.log('capturing on ' + address);
+    messageCapture.start(address);
 
-messageCapture.on('message', function (resultBuf) {
-    messageParser.parse(resultBuf, function (obj) {
-        var chatPane = document.getElementById(obj.type);
-        if (chatPane !== null) {
-            captureList.forEach(function (capture) {
-                var match = new RegExp(capture);
+    messageCapture.on('message', function (resultBuf) {
+        messageParser.parse(resultBuf, function (obj) {
+            var chatPane = document.getElementById(obj.type);
+            if (chatPane !== null) {
+                captureList.forEach(function (capture) {
+                    var match = new RegExp(capture);
 
-                if (obj.message.match(match)) {
-                    const options = {
-                        type: 'info',
-                        title: obj.name,
-                        message: obj.message,
-                        buttons: ['Close']
+                    if (obj.message.match(match)) {
+                        const options = {
+                            type: 'info',
+                            title: obj.name,
+                            message: obj.message,
+                            buttons: ['Close']
+                        }
+                        dialog.showMessageBox(options, function (index) {
+                            console.log(index);
+                        });
                     }
-                    dialog.showMessageBox(options, function (index) {
-                        console.log(index);
-                    });
-                }
-            })
-            chatPane.appendChild(ChatNode.chat(obj.name, obj.message));
-            chatPane.scrollTop = chatPane.scrollHeight;
-        } else {
-            console.log('Chat pane is not defined', obj);
-        }
+                })
+                chatPane.appendChild(ChatNode.chat(obj.name, obj.message));
+                chatPane.scrollTop = chatPane.scrollHeight;
+            } else {
+                console.log('Chat pane is not defined', obj);
+            }
+        })
     })
-})
+}
 
 const horn_search = document.getElementById('horn-search');
 const horn_search_keyword = document.getElementById('horn-search-keyword');
@@ -66,19 +68,10 @@ horn_search.addEventListener('click', function () {
     captureList = horn_search_keyword.value.split(',');
 })
 
-var networklist = document.getElementById('networklist');
-messageCapture.networklist().forEach(function (network, i) {
-    var networkInfo = new NetworkNode(network);
-    networklist.appendChild(networkInfo.getNetworkInfo(i));
-})
-
-var networklistAccordion = new Foundation.Accordion($('#networklist'), {
-    multiExpand: true,
-    allowAllClosed: true
-});
-
+// START::NETWORK LIST RENDERER
+var pop;
 $("#revealButton2").click(function () {
-    var pop = new Foundation.Reveal($('#device-selector'), {
+    pop = new Foundation.Reveal($('#device-selector'), {
         animationIn: true,
         animationOut: true
     })
@@ -88,6 +81,32 @@ $("#revealButton2").click(function () {
       pop.close();
     });
 })
+
+var networklist = document.getElementById('networklist');
+messageCapture.networklist().forEach(function (network, i) {
+    var networkInfo = new NetworkNode(network);
+
+    var networkTag = networkInfo.getNetworkInfo(i);
+    
+    if (networkTag) {
+        networklist.appendChild(networkTag);
+
+        networkInfo.on('select', function (ip) {
+            startCaptureWithIp(ip);
+            pop.close();
+        })
+    }
+
+})
+
+
+var networklistAccordion = new Foundation.Accordion($('#networklist'), {
+    multiExpand: true,
+    allowAllClosed: true
+});
+
+
+// END::NETWORK LIST RENDERER
 
 const BrowserWindow = require('electron').remote.BrowserWindow
 const newWindowBtn = document.getElementById('revealButton')

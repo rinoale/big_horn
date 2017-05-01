@@ -1,9 +1,26 @@
+var EventEmitter = require('events').EventEmitter;
+var util = require('util');
+
 function NetworkNode(network) {
     this.network = network;
 
 }
 
+util.inherits(NetworkNode, EventEmitter);
+
 NetworkNode.prototype.getNetworkInfo = function (index) {
+    this.hasIp;
+
+    this.network['addresses'].forEach((address) => {
+        if (address['addr'].match(/[a-zA-Z]/) === null) {
+            this.hasIp = address['addr'];
+        }
+    });
+
+    if (this.hasIp === undefined) {
+        return;
+    } 
+
     this.clickable_li = document.createElement('li');
     this.clickable_li.setAttribute('id', index);
     this.clickable_li.setAttribute('class', 'accordion-item');
@@ -13,8 +30,6 @@ NetworkNode.prototype.getNetworkInfo = function (index) {
     this.appendRow('addresses');
 
     // this.appendRow('name');
-
-    console.log(this.clickable_li);
 
     return this.clickable_li;
 }
@@ -34,9 +49,19 @@ NetworkNode.prototype.appendRow = function (subject) {
             accordion_content.setAttribute('class', 'accordion-content');
             accordion_content.setAttribute('data-tab-content', '');
             var content_p = document.createElement('p');
-            content_p.innerHTML = addressParse(this.network[subject]);
+            content_p.innerHTML = this.hasIp;
+
+            var button_a = document.createElement('a');
+            button_a.href = '#';
+            button_a.setAttribute('class', 'small button');
+            button_a.text = '선택';
+
+            button_a.addEventListener("click", () => {
+                this.emit('select', this.hasIp);
+            })
 
             accordion_content.appendChild(content_p);
+            accordion_content.appendChild(button_a);
             this.clickable_li.appendChild(accordion_content);
             break;
     }
