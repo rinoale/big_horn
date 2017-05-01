@@ -5,6 +5,7 @@
   "main": "src/main.js",
   "scripts": {
     "start": "electron .",
+    "postinstall": "electron-rebuild",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -12,7 +13,8 @@
   "dependencies": {
     "cap": "^0.1.1",
     "electron": "^1.4.0",
-    "winston": "^2.2.0",
-    "electron-rebuild": "1.5.7"
+    "electron-packager": "^8.6.0",
+    "electron-rebuild": "1.5.7",
+    "winston": "^2.2.0"
   }
 }

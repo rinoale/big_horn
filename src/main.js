@@ -14,7 +14,7 @@ global.paths = {
   libPath       : __dirname + '\\lib',
   modulesPath   : __dirname + '\\modules',
   renderersPath : __dirname + '\\renderers',
-  resourcesPath : appRoot + '\\resources',
+  resourcesPath : __dirname + '\\resources',
   viewsPath     : __dirname + '\\views'
 }
 
