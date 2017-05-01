@@ -66,16 +66,21 @@ horn_search.addEventListener('click', function () {
     captureList = horn_search_keyword.value.split(',');
 })
 
+var networklist = document.getElementById('networklist');
+messageCapture.networklist().forEach(function (network, i) {
+    var networkInfo = new NetworkNode(network);
+    networklist.appendChild(networkInfo.getNetworkInfo(i));
+})
+
+var networklistAccordion = new Foundation.Accordion($('#networklist'), {
+    multiExpand: true,
+    allowAllClosed: true
+});
+
 $("#revealButton2").click(function () {
     var pop = new Foundation.Reveal($('#device-selector'), {
         animationIn: true,
         animationOut: true
-    })
-    var networklist = document.getElementById('networklist');
-    
-    messageCapture.networklist().forEach(function (network) {
-        var networkInfo = new NetworkNode(network);
-        networklist.appendChild(networkInfo.getNetworkInfo());
     })
 
     pop.open();

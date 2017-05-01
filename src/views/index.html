@@ -46,17 +46,11 @@
         <div id="modalHead">
           <h2 id="modalTitle">네트워크 선택</h2>
         </div>
-        <div id="modalBody">
-          <table>
-            <thead>
-              <th>address</th>
-              <th>name</th>
-              <th>description</th>
-            </thead>
-            <tbody id="networklist">
-            </tbody>
-          </table>
+        <div id="modalBody" style="overflow:auto;">
+          <ul id="networklist" class="accordion" data-allow-all-closed="true">
+          </ul>
         </div>
+
         <div id="modalFoot" class="top-bar-right">
           <a class="small button close-reveal-modal" aria-label="Close">닫기</a>
         </div>
